@@ -36,6 +36,11 @@ class Login extends CI_Controller{
             echo "fail";
         }
     }
+
+    public function login_out(){
+        $this->session->sess_destroy();
+        redirect(site_url()."/login");
+    }
 }
 
 /* End of file login.php */

@@ -13,13 +13,15 @@ class Index extends CI_Controller{
         parent::__construct();
         $this->load->model('admin_model');
         $this->admin_model->auth_check();
+        $this->load->library('session');
     }
 
     /**
      * 后台管理首页
      */
     public function index(){
-        $this->load->view('index');
+        $data['login_name'] = $this->session->userdata('admin_info');
+        $this->load->view('index', $data);
     }
 
 }

@@ -33,7 +33,7 @@ class Admin_Model extends CI_Model {
         $this->load->library('session');
         $tmp = $this->session->userdata('admin_info');
         if (!$this->session->userdata('admin_info')) {
-            redirect(site_url());
+            redirect(site_url()."/login");
         }
     }
 }
