@@ -20,8 +20,32 @@ class Index extends CI_Controller{
      * 后台管理首页
      */
     public function index(){
-        $data['login_name'] = $this->session->userdata('admin_info');
-        $this->load->view('index', $data);
+        $this->load->view('index');
     }
 
+    /**
+     * 密码修改
+     */
+    public function change_pwd(){
+
+        //POST如果有数据则进行更新验证
+        if ($this->input->post('curr_pwd') && $this->input->post('new_pwd')) {
+            //验证当前密码是否正确
+            $num = $this->admin_model->check_login($this->session->userdata('admin_info'), md5($this->input->post('curr_pwd')));
+            if (!$num) {
+                die('fail');
+            } else {
+                $result = $this->admin_model->change_pwd($this->session->userdata('admin_info'), md5($this->input->post('new_pwd')));
+                if ($result) {
+                    die('ok');
+                } else {
+                    die('0');
+                }
+            }
+        }
+        $this->load->view('change_pwd');
+    }
 }
+
+/* End of file index.php */
+/* Location: ./app/controllers/index.php */

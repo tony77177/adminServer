@@ -31,12 +31,14 @@ class Login extends CI_Controller{
         if ($result > 0) {
             $this->session->set_userdata('admin_info',$user_name);//记录用户名，用于判断是否登录
             die("<script>window.location.href='" . site_url() . "/index/';</script>");
-            echo "ok";
         } else {
             echo "fail";
         }
     }
 
+    /**
+     * 退出登录
+     */
     public function login_out(){
         $this->session->sess_destroy();
         redirect(site_url()."/login");

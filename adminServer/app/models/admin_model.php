@@ -36,6 +36,18 @@ class Admin_Model extends CI_Model {
             redirect(site_url()."/login");
         }
     }
+
+    /**
+     * 修改密码
+     * @param $_login_name      用户名
+     * @param $_pwd                 密码
+     * @return bool                     TRUE OR FALSE
+     */
+    function change_pwd($_login_name, $_pwd){
+        $update_sql = "UPDATE t_admin SET pass_word='" . $_pwd . "' WHERE user_name='" . $_login_name . "'";
+        $result = $this->common_model->execQuery($update_sql, 'default', TRUE);
+        return $result;
+    }
 }
 
 /* End of file admin_model.php */
