@@ -1,30 +1,27 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * 公共方法类
  * Created by PhpStorm.
- * User: zhaoyu
- * Date: 13-12-31
- * Time: 下午16:23
+ * User: TONY
+ * Date: 14-1-1
+ * Time: 下午1:08
  */
 
 class Common_class {
 
-    function __construct(){
+    function __construct() {
         $CI =& get_instance();
         $this->config = $CI->config;
         $this->load = $CI->load;
     }
 
-    
     /**
      * 分页生成
-     * @param string $base_url  当前分页URL
-     * @param int $total_rows   数据总条数
-     * @param int $per_page     每页显示数据条数
-     * @param int $uri_segment  分页方法自动测定你 URI 的哪个部分包含页数
-     * @param int $cur_page     当前页码，用于条件查询时初始返回第一页
-     * @return mixed            分页信息
+     * @param string $base_url          BASE_URL
+     * @param int $total_rows           数据总条数
+     * @param int $per_page             每页显示条数
+     * @param int $uri_segment          获取参数的段
+     * @return array                    配置数组
      */
     public function getPageConfigInfo($base_url = NULL, $total_rows = 0, $per_page = 0, $uri_segment = 0) {
         $config = array();
@@ -41,7 +38,7 @@ class Common_class {
         $config['per_page'] = $per_page;
         $config['uri_segment'] = $uri_segment;
 
-        $config['full_tag_open'] = "<ul class=\"pagination pull-right\">";
+        $config['full_tag_open'] = "<ul class=\"pagination\">";
         $config['full_tag_close'] = "</ul>";
 
         $config['first_link'] = '首页';
@@ -167,6 +164,4 @@ class Common_class {
         }
     }
 }
-
-/* End of file common_class.php */
-/* Location: ./app/libraries/common_class.php */
+/*End of file Common_class.php*/

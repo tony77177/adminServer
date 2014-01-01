@@ -11,7 +11,6 @@ class Login extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model('admin_model');
-        $this->load->library('session');
     }
 
     /**
@@ -30,6 +29,7 @@ class Login extends CI_Controller{
         $result = $this->admin_model->check_login($user_name, md5($pwd));
         if ($result > 0) {
             $this->session->set_userdata('admin_info',$user_name);//记录用户名，用于判断是否登录
+            $this->admin_model->add_log($this->input->ip_address(),$user_name);//记录登录日志
             die("<script>window.location.href='" . site_url() . "/index/';</script>");
         } else {
             echo "fail";

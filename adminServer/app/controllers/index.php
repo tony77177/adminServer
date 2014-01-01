@@ -13,7 +13,6 @@ class Index extends CI_Controller{
         parent::__construct();
         $this->load->model('admin_model');
         $this->admin_model->auth_check();
-        $this->load->library('session');
     }
 
     /**

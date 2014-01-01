@@ -14,8 +14,6 @@
                     <div style="margin-bottom: 10px;">
                         <a href="<?php echo site_url(); ?>/news_list/add" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus"></span> 添加文章</a>
                     </div>
-
-
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -26,55 +24,59 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="removed">
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td><span class="glyphicon glyphicon-edit"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>
-                            <td>admin</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>
-                        </tr>
-                        <tr class="removed">
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td><span class="glyphicon glyphicon-edit"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>
-                            <td>admin</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>
-                        </tr>
-                        <tr class="removed">
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td><span class="glyphicon glyphicon-edit"></span></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>
-                            <td>admin</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>
-                        </tr>
+                        <?php
+                        for ($i = 0; $i < count($news_list); $i++) {
+                            ?>
+                            <tr>
+                                <td><a href="#"><?php echo $news_list[$i]["title"];?></a></td>
+                                <td><?php echo $news_list[$i]["author"];?></td>
+                                <td><?php echo $news_list[$i]["create_dt"];?></td>
+                                <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+<!--                        <tr class="removed">-->
+<!--                            <td>2</td>-->
+<!--                            <td>Jacob</td>-->
+<!--                            <td>Thornton</td>-->
+<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
+<!--                            <td>admin</td>-->
+<!--                            <td>2013-12-31 14:54:12</td>-->
+<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
+<!--                        </tr>-->
+<!--                        <tr class="removed">-->
+<!--                            <td>2</td>-->
+<!--                            <td>Jacob</td>-->
+<!--                            <td>Thornton</td>-->
+<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
+<!--                            <td>admin</td>-->
+<!--                            <td>2013-12-31 14:54:12</td>-->
+<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
+<!--                        </tr>-->
+<!--                        <tr class="removed">-->
+<!--                            <td>2</td>-->
+<!--                            <td>Jacob</td>-->
+<!--                            <td>Thornton</td>-->
+<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
+<!--                            <td>admin</td>-->
+<!--                            <td>2013-12-31 14:54:12</td>-->
+<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
+<!--                        </tr>-->
                         </tbody>
                     </table>
 
                     <div>
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">«</a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
+                        <?php echo $pagination;?>
                     </div>
 
                 </div>
