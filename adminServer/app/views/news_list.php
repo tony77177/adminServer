@@ -27,11 +27,14 @@
                         <?php
                         for ($i = 0; $i < count($news_list); $i++) {
                             ?>
-                            <tr>
-                                <td><a href="#"><?php echo $news_list[$i]["title"];?></a></td>
+                            <tr id="news_list_<?=$i;?>">
+                                <td><a><?php echo $news_list[$i]["title"];?></a></td>
                                 <td><?php echo $news_list[$i]["author"];?></td>
                                 <td><?php echo $news_list[$i]["create_dt"];?></td>
-                                <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>
+                                <td id="news_list_operate_<?=$i;?>">
+                                    <a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp;
+                                    <a href="javascript:del(<?=$i;?>);"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+                                </td>
                             </tr>
                         <?php
                         }
@@ -95,6 +98,16 @@
     $(document).ready(function(){
        $("#news_list").attr('class','active');
     });
+
+    function del(_obj){
+//        alert(_obj);
+        var news_list = 'news_list_'+_obj;
+        var news_operate = 'news_list_operate_'+_obj;
+
+        $("#" + news_list).attr('class', 'removed');
+        $("#" + news_operate).hide();
+    }
+
 </script>
 
 <style>
