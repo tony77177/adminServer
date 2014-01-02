@@ -28,50 +28,18 @@
                                 <td><a><?php echo $log_list[$i]["admin_name"];?></a></td>
                                 <td><?php echo $log_list[$i]["ip_addr"];?></td>
                                 <td><?php echo $log_list[$i]["log_dt"];?></td>
-<!--                                <td>金三顺</td>-->
-<!--                                <td>123456789@qq.com</td>-->
-<!--                                <td>2013-11-12 15:57:43</td>-->
                             </tr>
                         <?php
                         }
                         ?>
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>金三顺</td>-->
-<!--                            <td>123456789@qq.com</td>-->
-<!--                            <td>2013-11-12 15:57:43</td>-->
-<!--                        </tr>-->
                         </tbody>
-                        <?php
-                            if (count($log_list) == 0) {
-                                echo "<p align=\"center\" style=\"color:red\">没有数据！</p>";
-                            }
-                        ?>
                     </table>
+
+                    <?php
+                    if (count($log_list) == 0) {
+                        echo "<p align=\"center\" style=\"color:red\">没有数据！</p>";
+                    }
+                    ?>
 
                     <div>
                         <?php echo $pagination; ?>

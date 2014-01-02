@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://192.168.1.103/adminServer/';
+$config['base_url']	= 'http://10.254.58.177/web_me/adminServer/';
 
 /*
 |--------------------------------------------------------------------------

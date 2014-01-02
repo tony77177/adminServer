@@ -74,7 +74,11 @@
             } else {
                 $("#change_pwd").html('修改中...');
                 $("#change_pwd").attr('disabled',true);
-                $.post("<?php echo site_url() ?>/index/change_pwd", {curr_pwd: curr_pwd, new_pwd: new_pwd}, function (msg) {
+                $.ajax({
+                    url:"<?php echo site_url() ?>/index/change_pwd",
+                    type:"POST",
+                    data:{curr_pwd: curr_pwd, new_pwd: new_pwd},
+                    success:function(msg){
                         if (msg == 'fail') {
                             art.dialog({
                                 id: 'warning',
@@ -88,6 +92,7 @@
                             $("#change_pwd").html("修改");
                             $("#change_pwd").attr('disabled', false);
                             $("#curr_pwd").focus();
+                            return false;
                         } else if (msg == 'ok'){
                             art.dialog({
                                 id: 'success',
@@ -99,6 +104,7 @@
                                 resize: false
                             });
                             $("#change_pwd").html("修改成功");
+                            setTimeout("window.location.href='<?php echo site_url() ?>'",2000)
                         } else {
                             art.dialog({
                                 id: 'warning',
@@ -111,10 +117,28 @@
                             });
                             $("#change_pwd").html("修改失败");
                         }
+                    },
+                    error:function(){
+                        art.dialog({
+                            id: 'warning',
+                            title: '提示',
+                            content: '数据库连接出错，请稍后再试',
+                            icon: 'error',
+                            time: 3,
+                            drag: false,
+                            resize: false
+                        });
+                        $("#change_pwd").html("修改失败");
                     }
-                );
+                });
             }
         });
+    });
+
+    $(document).keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#change_pwd").click();
+        }
     });
 </script>
 

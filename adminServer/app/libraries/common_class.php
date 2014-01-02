@@ -163,5 +163,32 @@ class Common_class {
             return $this->config->config['user_define'];
         }
     }
+
+    /**
+     * 设置发送邮件相应参数
+     * @param null $_protocol           邮件发送协议，默认SMTP
+     * @param null $_smtp_host      SMTP 服务器地址
+     * @param null $_smtp_user      SMTP 用户账号
+     * @param null $_smtp_pass      SMTP 密码
+     * @param string $_charset          字符集，默认UTF-8
+     * @param bool $_wordwrap       开启自动换行。
+     * @param string $_mailtype     邮件类型，默认HTML
+     * @return array                        配置相关信息
+     */
+    public function getEmailConfigInfo($_smtp_host = NULL, $_smtp_user = NULL, $_smtp_pass = NULL, $_wordwrap = TRUE, $_mailtype = "html", $_protocol = "smtp", $_charset = "utf-8"){
+        $config = array();
+
+        $config['protocol'] = $_protocol;
+        $config['smtp_host'] = $_smtp_host;
+        $config['smtp_user'] = $_smtp_user;
+        $config['smtp_pass'] = $_smtp_pass;
+        $config['charset'] = $_charset;
+        $config['wordwrap'] = $_wordwrap;
+        $config['mailtype'] = $_mailtype;
+
+        return $config;
+    }
 }
-/*End of file Common_class.php*/
+
+/* End of file common_class.php */
+/* Location: ./app/libraries/common_class.php */

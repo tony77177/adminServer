@@ -75,6 +75,12 @@
                         </tbody>
                     </table>
 
+                    <?php
+                    if (count($news_list) == 0) {
+                        echo "<p align=\"center\" style=\"color:red\">没有数据！</p>";
+                    }
+                    ?>
+
                     <div>
                         <?php echo $pagination;?>
                     </div>

@@ -23,12 +23,12 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>金三顺</td>
-                            <td>请问具体的地址</td>
-                            <td>123456789@qq.com</td>
-                            <td>2013-11-12 15:57:43</td>
+                            <td id="user_name_1">金三顺</td>
+                            <td id="content_1">请问具体的地址</td>
+                            <td id="email_1">123456789@qq.com</td>
+                            <td id="add_time_1">2013-11-12 15:57:43</td>
                             <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
+                                <a href="javascript:send_email(1);"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
                             </td>
                         </tr>
                         <tr>
@@ -101,6 +101,81 @@
     $(document).ready(function(){
         $("#message_list").attr('class','active');
     });
+
+    function send_email(_id) {
+
+        var user_name = 'user_name_' + _id;
+        var user_name = $("#" + user_name).text()
+
+        var email = 'email_' + _id;
+        var email = $("#" + email).text()
+
+        var add_time = 'add_time_' + _id;
+        var add_time = $("#" + add_time).text()
+
+        var content = 'content_' + _id;
+        var content = $("#" + content).text()
+
+        art.dialog({
+            title: '提示',
+            content: '确定要发送吗？',
+            icon: 'question',
+            drag: false,
+            resize: false,
+            ok: function () {
+                art.dialog({
+                    id: 'send_mail'
+                });
+                art.dialog.get('send_mail').title('发送中...').lock();
+
+                $.ajax({
+                    url: "<?php echo site_url() ?>/message_list/send_mail",
+                    type: "POST",
+                    data: {user_name: user_name, email: email, add_time: add_time, content: content},
+                    success: function (msg) {
+                        art.dialog.get('send_mail').close();
+                        if (msg == 'fail') {
+                            art.dialog({
+                                id: 'warning',
+                                title: '提示',
+                                content: '发送失败，请稍后再试',
+                                icon: 'error',
+                                time: 2,
+                                drag: false,
+                                resize: false
+                            });
+                            return false;
+                        } else {
+                            art.dialog({
+                                id: 'succeed',
+                                title: '提示',
+                                content: '发送成功，请查收',
+                                icon: 'succeed',
+                                time: 2,
+                                drag: false,
+                                resize: false
+                            });
+                            return false;
+                        }
+                    },
+                    error: function () {
+                        art.dialog({
+                            id: 'warning',
+                            title: '提示',
+                            content: '数据库连接出错，请稍后再试',
+                            icon: 'error',
+                            time: 3,
+                            drag: false,
+                            resize: false
+                        });
+                    }
+                });
+            },
+            cancelVal: '关闭',
+            cancel: true
+        });
+    }
+
 </script>
 
 <?php require_once('common/footer.php');?>

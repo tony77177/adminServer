@@ -14,22 +14,22 @@
                 <div class="panel-body">
                     <table class="table table-hover">
                         <tbody>
-                        <tr>
-                            <th nowrap="nowrap">留言数</th>
-                            <td><a href="/xsmanager/index.php/project/index">2 条</a></td>
-                        </tr>
-                        <tr>
-                            <th nowrap="nowrap">文章数</th>
-                            <td><a href="/xsmanager/index.php/project/index">2 篇</a></td>
-                        </tr>
-                        <tr>
-                            <th nowrap="nowrap">登录数</th>
-                            <td><a href="/xsmanager/index.php/project/index">3 次</a></td>
-                        </tr>
-                        <tr>
-                            <th nowrap="nowrap">上次登录时间</th>
-                            <td>2013-12-30 11:22:41</td>
-                        </tr>
+                            <tr>
+                                <th nowrap="nowrap">文章数</th>
+                                <td><a href="<?php echo site_url();?>/news_list/"><?php echo $news_num;?> 篇</a></td>
+                            </tr>
+                            <tr>
+                                <th nowrap="nowrap">留言数</th>
+                                <td><a href="<?php echo site_url();?>/message_list/"><?php echo $message_num;?> 条</a></td>
+                            </tr>
+                            <tr>
+                                <th nowrap="nowrap">登录数</th>
+                                <td><a href="<?php echo site_url();?>/log_list/"><?php echo $login_num;?> 次</a></td>
+                            </tr>
+                            <tr>
+                                <th nowrap="nowrap">上次登录时间</th>
+                                <td><?php echo $latest_login;?></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

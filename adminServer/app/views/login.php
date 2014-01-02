@@ -112,7 +112,11 @@
             } else {
                 $("#login_btn").html("登录中...");
                 $("#login_btn").attr('disabled', true);
-                $.post("<?php echo site_url() ?>/login/check_login", {user_name: user, pass_word: pwd}, function (msg) {
+                $.ajax({
+                    url: "<?php echo site_url() ?>/login/check_login",
+                    type: "POST",
+                    data: {user_name: user, pass_word: pwd},
+                    success: function (msg) {
                         if (msg == 'fail') {
                             art.dialog({
                                 id: 'warning',
@@ -129,8 +133,20 @@
                         } else {
                             $("#info").html(msg);
                         }
+                    },
+                    error: function () {
+                        art.dialog({
+                            id: 'warning',
+                            title: '提示',
+                            content: '数据库连接出错，请稍后再试',
+                            icon: 'error',
+                            time: 3,
+                            drag: false,
+                            resize: false
+                        });
+                        $("#login_btn").html("登录失败");
                     }
-                );
+                });
             }
         });
 
