@@ -45,7 +45,10 @@
                     $("#_edit").html('修改中...');
                     $("#_edit").attr('disabled',true);
                     art.dialog({
-                        id: 'edit_news'
+                        id: 'edit_news',
+                        cancel: false,
+                        drag: false,
+                        resize: false
                     });
                     art.dialog.get('edit_news').title('修改中...').lock();
                     $.post("<?php echo site_url() ?>/news_list/edit/"+uuid, {_title: title, _content: content}, function (msg) {

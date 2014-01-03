@@ -87,7 +87,10 @@
             resize: false,
             ok: function () {
                 art.dialog({
-                    id: 'send_mail'
+                    id: 'send_mail',
+                    cancel: false,
+                    drag: false,
+                    resize: false
                 });
                 art.dialog.get('send_mail').title('发送中...').lock();
 

@@ -92,6 +92,9 @@ class News_list extends CI_Controller{
             }
 
             $data['news_info'] = $this->news_model->get_list('0', '1', "WHERE id='" . $_id . "'");
+            if (empty($data['news_info'])) {
+                redirect('index');
+            }
             $data['uuid'] = $_id;
             $this->load->view('news_edit', $data);
         }

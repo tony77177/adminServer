@@ -76,7 +76,10 @@
             ok: function () {
 
                 art.dialog({
-                    id: 'del_news'
+                    id: 'del_news',
+                    cancel: false,
+                    drag: false,
+                    resize: false
                 });
                 art.dialog.get('del_news').title('操作中...').lock();
 

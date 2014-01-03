@@ -83,7 +83,10 @@
                     $("#_add").html('添加中...');
                     $("#_add").attr('disabled',true);
                     art.dialog({
-                        id: 'add_news'
+                        id: 'add_news',
+                        cancel: false,
+                        drag: false,
+                        resize: false
                     });
                     art.dialog.get('add_news').title('添加中...').lock();
                     $.post("<?php echo site_url() ?>/news_list/add", {_title: title, _content: content}, function (msg) {
