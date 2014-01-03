@@ -32,7 +32,7 @@ $config['email_config_info'] = array(
     'smtp_pass' => 'woainitest',
     'email_addr' => 'justfortest77@126.com',
     'email_title' => '咨询留言邮件',
-    'send_to' => 'epdctt@sina.com'
+    'send_to' => 'tony77@foxmail.com'
 );
 
 /* End of file user_define.php */

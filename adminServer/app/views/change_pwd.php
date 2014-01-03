@@ -97,7 +97,7 @@
                             art.dialog({
                                 id: 'success',
                                 title: '提示',
-                                content: '修改成功',
+                                content: '修改成功，2秒后自动跳转',
                                 icon: 'succeed',
                                 time: 2,
                                 drag: false,

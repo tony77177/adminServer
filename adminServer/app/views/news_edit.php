@@ -1,45 +1,5 @@
 <?php require_once('common/header.php');?>
 
-    <div class="container">
-        <div class="row">
-
-            <?php require_once('common/menu.php');?>
-
-            <div class="col-xs-10">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-plus-sign"></span> 添加文章</h3>
-                    </div>
-                    <div class="panel-body">
-
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="title" class="col-sm-2 control-label">标题</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入文章标题">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">标题</label>
-                                <div class="col-sm-10">
-                                    <textarea id="editor_content" name="content" style="height:300px;"></textarea>
-                                </div>
-
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="button" class="btn btn-primary" id="_add">添加</button>&emsp;
-                                    <a href="<?php echo site_url(); ?>/news_list/" class="btn btn-default" role="button">返回列表</a>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script charset="utf-8" src="res/kindeditor/kindeditor.js"></script>
     <script charset="utf-8" src="res/kindeditor/lang/zh_CN.js"></script>
 
@@ -65,9 +25,11 @@
                 editor = K.create('textarea[name="content"]',options);
             });
 
-            $("#_add").click(function(){
+            $("#_edit").click(function(){
                 var title = $("#title").val();
                 var content = editor.html();
+                var uuid = $("#uuid").val();
+
                 if (title == '' || content == '') {
                     art.dialog({
                         id: 'warning',
@@ -80,42 +42,83 @@
                     });
                     return false;
                 }else{
-                    $("#_add").html('添加中...');
-                    $("#_add").attr('disabled',true);
+                    $("#_edit").html('修改中...');
+                    $("#_edit").attr('disabled',true);
                     art.dialog({
-                        id: 'add_news'
+                        id: 'edit_news'
                     });
-                    art.dialog.get('add_news').title('添加中...').lock();
-                    $.post("<?php echo site_url() ?>/news_list/add", {_title: title, _content: content}, function (msg) {
-                        art.dialog.get('add_news').close();
+                    art.dialog.get('edit_news').title('修改中...').lock();
+                    $.post("<?php echo site_url() ?>/news_list/edit/"+uuid, {_title: title, _content: content}, function (msg) {
+                        art.dialog.get('edit_news').close();
                         if (msg == 'ok') {
                             art.dialog({
                                 id: 'success',
                                 title: '提示',
-                                content: '添加成功，2秒后自动跳转',
+                                content: '修改成功，2秒后自动跳转',
                                 icon: 'succeed',
                                 time: 2,
                                 drag: false,
                                 resize: false
                             });
-                            $("#_add").html('添加成功.');
+                            $("#_edit").html('修改成功.');
                             setTimeout("window.location.href='<?php echo site_url() ?>/news_list'",2000)
                         } else {
                             art.dialog({
                                 id: 'warning',
                                 title: '提示',
-                                content: '添加失败，请稍后再试',
+                                content: '修改失败，请稍后再试',
                                 icon: 'error',
                                 time: 2,
                                 drag: false,
                                 resize: false
                             });
-                            $("#_add").html('添加失败.');
+                            $("#_edit").html('修改失败.');
                         }
                     });
                 }
             });
         });
     </script>
+
+    <div class="container">
+        <div class="row">
+
+            <?php require_once('common/menu.php');?>
+
+            <div class="col-xs-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-plus-sign"></span> 添加文章</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="title" class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入文章标题" value="<?=$news_info[0]['title'];?>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">标题</label>
+                                <div class="col-sm-10">
+                                    <textarea id="editor_content" name="content" style="height:300px;"><?=$news_info[0]['content'];?></textarea>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" class="btn btn-primary" id="_edit">修改</button>&emsp;
+                                    <a href="<?php echo site_url(); ?>/news_list/" class="btn btn-default" role="button">返回列表</a>
+                                    <input type="hidden" value="<?php echo $uuid;?>" id="uuid">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php require_once('common/footer.php');?>

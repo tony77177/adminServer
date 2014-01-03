@@ -7,7 +7,7 @@
  * Time: 下午2:47
  */
 
-class Index_model extends CI_Controller{
+class Index_model extends CI_Model{
 
     function __construct() {
         parent::__construct();
@@ -44,6 +44,16 @@ class Index_model extends CI_Controller{
         $latest_sql = "SELECT log_dt FROM t_log WHERE admin_name='" . $_login_name . "' ORDER BY log_dt DESC LIMIT 1";
         $result = $this->common_model->getDataList($latest_sql, 'default');
         return $result[0]["log_dt"];
+    }
+
+    /**
+     * 获取留言总条数
+     * @return mixed    留言总条数
+     */
+    function get_message_total_num(){
+        $sql = "SELECT COUNT(*) AS num FROM t_message";
+        $count = $this->common_model->getTotalNum($sql, 'default');
+        return $count;
     }
 
 }

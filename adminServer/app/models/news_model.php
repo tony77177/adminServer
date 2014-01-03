@@ -7,7 +7,7 @@
  * Time: 下午9:41
  */
 
-class News_model extends CI_Controller{
+class News_model extends CI_Model{
 
     function __construct() {
         parent::__construct();
@@ -24,6 +24,30 @@ class News_model extends CI_Controller{
     function add_news($_title,$_content,$_author){
         $insert_sql = "INSERT INTO t_news(id,title,content,author,create_dt) VALUES(UUID(),'".$_title."','".$_content."','".$_author."','".date('Y-m-d H:i:s')."')";
         $result = $this->common_model->execQuery($insert_sql, 'default', TRUE);
+        return $result;
+    }
+
+    /**
+     * 删除新闻
+     * @param   $_id    新闻ID
+     * @return bool         TRUE OR FALSE
+     */
+    function del_news($_id){
+        $del_sql = "DELETE FROM t_news WHERE id='" . $_id . "'";
+        $result = $this->common_model->execQuery($del_sql, 'default', TRUE);
+        return $result;
+    }
+
+    /**
+     * 编辑新闻
+     * @param   $_id      新闻ID
+     * @param   $_title     新闻标题
+     * @param   $_content   新闻内容
+     * @return bool         TRUE OR FALSE
+     */
+    function upd_news($_id, $_title, $_content){
+        $upd_news = "UPDATE t_news SET title='" . $_title . "',content='" . $_content . "' WHERE id='" . $_id . "'";
+        $result = $this->common_model->execQuery($upd_news, 'default', TRUE);
         return $result;
     }
 
@@ -50,6 +74,8 @@ class News_model extends CI_Controller{
         $count = $this->common_model->getTotalNum($sql, 'default');
         return $count;
     }
+
+
 }
 
 /* End of file news_model.php */

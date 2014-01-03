@@ -14,67 +14,31 @@
                     <div style="margin-bottom: 10px;">
                         <a href="<?php echo site_url(); ?>/news_list/add" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-plus"></span> 添加文章</a>
                     </div>
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-hover">
                         <thead>
-                        <tr>
-                            <th>标题</th>
-                            <th>作者</th>
-                            <th>时间</th>
-                            <th>操作</th>
-                        </tr>
+                            <tr>
+                                <th>标题</th>
+                                <th>作者</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php
-                        for ($i = 0; $i < count($news_list); $i++) {
+                            <?php
+                            for ($i = 0; $i < count($news_list); $i++) {
+                                ?>
+                                <tr id="news_list_<?=$news_list[$i]["id"];?>">
+                                    <td><a><?php echo $news_list[$i]["title"];?></a></td>
+                                    <td><?php echo $news_list[$i]["author"];?></td>
+                                    <td><?php echo $news_list[$i]["create_dt"];?></td>
+                                    <td id="news_list_operate_<?=$news_list[$i]["id"];?>">
+                                        <a href="<?php echo site_url(); ?>/news_list/edit/<?=$news_list[$i]["id"];?>"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp;
+                                        <a href="javascript:del('<?=$news_list[$i]["id"];?>');"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
                             ?>
-                            <tr id="news_list_<?=$i;?>">
-                                <td><a><?php echo $news_list[$i]["title"];?></a></td>
-                                <td><?php echo $news_list[$i]["author"];?></td>
-                                <td><?php echo $news_list[$i]["create_dt"];?></td>
-                                <td id="news_list_operate_<?=$i;?>">
-                                    <a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp;
-                                    <a href="javascript:del(<?=$i;?>);"><span class="glyphicon glyphicon-remove"></span> 删除</a>
-                                </td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-<!--                        <tr class="removed">-->
-<!--                            <td>2</td>-->
-<!--                            <td>Jacob</td>-->
-<!--                            <td>Thornton</td>-->
-<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
-<!--                            <td>admin</td>-->
-<!--                            <td>2013-12-31 14:54:12</td>-->
-<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
-<!--                        </tr>-->
-<!--                        <tr class="removed">-->
-<!--                            <td>2</td>-->
-<!--                            <td>Jacob</td>-->
-<!--                            <td>Thornton</td>-->
-<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
-<!--                            <td>admin</td>-->
-<!--                            <td>2013-12-31 14:54:12</td>-->
-<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
-<!--                        </tr>-->
-<!--                        <tr class="removed">-->
-<!--                            <td>2</td>-->
-<!--                            <td>Jacob</td>-->
-<!--                            <td>Thornton</td>-->
-<!--                            <td><span class="glyphicon glyphicon-edit"></span></td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td><a href="#">中国新年即将来临啦，欢迎大家一起来看跨年</a></td>-->
-<!--                            <td>admin</td>-->
-<!--                            <td>2013-12-31 14:54:12</td>-->
-<!--                            <td><a href="#"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp; <a href="#"><span class="glyphicon glyphicon-remove"></span> 删除</a></td>-->
-<!--                        </tr>-->
                         </tbody>
                     </table>
 
@@ -99,13 +63,53 @@
        $("#news_list").attr('class','active');
     });
 
-    function del(_obj){
-//        alert(_obj);
-        var news_list = 'news_list_'+_obj;
-        var news_operate = 'news_list_operate_'+_obj;
+    function del(_id) {
+        var news_list = 'news_list_' + _id;
+        var news_operate = 'news_list_operate_' + _id;
 
-        $("#" + news_list).attr('class', 'removed');
-        $("#" + news_operate).hide();
+        art.dialog({
+            title: '提示',
+            content: '确定要删除吗？',
+            icon: 'question',
+            drag: false,
+            resize: false,
+            ok: function () {
+
+                art.dialog({
+                    id: 'del_news'
+                });
+                art.dialog.get('del_news').title('操作中...').lock();
+
+                $.post("<?php echo site_url() ?>/news_list/del",{_uuid: _id},function(msg){
+                    art.dialog.get('del_news').close();
+                    if (msg == 'fail') {
+                        art.dialog({
+                            id: 'warning',
+                            title: '提示',
+                            content: '删除失败，请稍后再试',
+                            icon: 'error',
+                            time: 2,
+                            drag: false,
+                            resize: false
+                        });
+                    } else {
+                        art.dialog({
+                            id: 'success',
+                            title: '提示',
+                            content: '删除成功',
+                            icon: 'succeed',
+                            time: 2,
+                            drag: false,
+                            resize: false
+                        });
+                        $("#" + news_list).attr('class', 'removed');
+                        $("#" + news_operate).hide();
+                    }
+                });
+            },
+            cancelVal: '关闭',
+            cancel: true
+        });
     }
 
 </script>

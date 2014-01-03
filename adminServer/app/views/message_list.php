@@ -22,73 +22,36 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td id="user_name_1">金三顺</td>
-                            <td id="content_1">请问具体的地址</td>
-                            <td id="email_1">123456789@qq.com</td>
-                            <td id="add_time_1">2013-11-12 15:57:43</td>
-                            <td>
-                                <a href="javascript:send_email(1);"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>中国新年</td>
-                            <td>admin</td>
-                            <td>请问具体的地址</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>金三顺</td>
-                            <td>请问具体的地址</td>
-                            <td>123456789@qq.com</td>
-                            <td>2013-11-12 15:57:43</td>
-                            <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>将来临啦，欢迎</td>
-                            <td>admin</td>
-                            <td>请问具体的地址</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>金三顺</td>
-                            <td>请问具体的地址</td>
-                            <td>123456789@qq.com</td>
-                            <td>2013-11-12 15:57:43</td>
-                            <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>即将来临啦，欢迎大家一</td>
-                            <td>admin</td>
-                            <td>请问具体的地址</td>
-                            <td>2013-12-31 14:54:12</td>
-                            <td>
-                                <a href="#"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
-                            </td>
-                        </tr>
+                            <?php
+                            for ($i = 0; $i < count($message_list); $i++) {
+                                ?>
+                                <tr>
+                                    <td id="user_name_<?=$i;?>"><?php echo $message_list[$i]["name"];?></td>
+                                    <td id="content_<?=$i;?>">
+                                        <a class="show_all" data-toggle="tooltip" title="<?php echo $message_list[$i]["content"];?>" >
+                                            <?php echo $this->common_class->SubContents($message_list[$i]["content"]);?>
+                                        </a>
+                                    </td>
+                                    <td id="email_<?=$i;?>"><?php echo $message_list[$i]["email"];?></td>
+                                    <td id="add_time_<?=$i;?>"><?php echo $message_list[$i]["create_dt"];?></td>
+                                    <td>
+                                        <a href="javascript:send_email(<?=$i;?>);"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
                         </tbody>
                     </table>
 
+                    <?php
+                    if (count($message_list) == 0) {
+                        echo "<p align=\"center\" style=\"color:red\">没有数据！</p>";
+                    }
+                    ?>
+
                     <div>
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#">«</a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
+                        <?php echo $pagination;?>
                     </div>
 
                 </div>
@@ -175,6 +138,11 @@
             cancel: true
         });
     }
+
+    $(".show_all").tooltip({
+        placement:'auto bottom',
+        html:'true'
+    });
 
 </script>
 

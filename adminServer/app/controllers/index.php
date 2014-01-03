@@ -20,7 +20,7 @@ class Index extends CI_Controller{
      * 后台管理首页
      */
     public function index(){
-        $data['message_num'] = '0';
+        $data['message_num'] = $this->index_model->get_message_total_num();
         $data['news_num'] = $this->index_model->get_news_total_num();
         $data['login_num'] = $this->index_model->get_log_total_num($this->session->userdata('admin_info'));
         $data['latest_login'] = $this->index_model->get_latest_login_time($this->session->userdata('admin_info'));

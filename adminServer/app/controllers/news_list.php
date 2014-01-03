@@ -56,6 +56,46 @@ class News_list extends CI_Controller{
         }
         $this->load->view('news_add');
     }
+
+    /**
+     * 删除文章
+     */
+    function del(){
+        if ($this->input->post('_uuid')) {
+            $result = $this->news_model->del_news($this->input->post('_uuid'));
+            if ($result) {
+                die('ok');
+            } else {
+                die('fail');
+            }
+        } else {
+            die('fail');
+        }
+    }
+
+    /**
+     * 文章编辑
+     * @param $_id  文章ID
+     */
+    public function edit($_id){
+        if (empty($_id)) {
+            redirect('index');
+        } else {
+
+            if ($this->input->post('_title') && $this->input->post('_content')) {
+                $result = $this->news_model->upd_news($_id, $this->input->post('_title'), $this->input->post('_content'));
+                if ($result) {
+                    die('ok');
+                } else {
+                    die('fail');
+                }
+            }
+
+            $data['news_info'] = $this->news_model->get_list('0', '1', "WHERE id='" . $_id . "'");
+            $data['uuid'] = $_id;
+            $this->load->view('news_edit', $data);
+        }
+    }
 }
 
 /* End of file news_list.php */

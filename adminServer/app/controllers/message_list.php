@@ -9,27 +9,44 @@
 
 class Message_list extends CI_Controller{
 
+    private $per_page = 5; //每页显示数据条数
+    private $uri_segment = 2; //分页方法自动测定你 URI 的哪个部分包含页数
+
     function __construct(){
         parent::__construct();
         $this->load->model('admin_model');
         $this->admin_model->auth_check();
-        $this->load->library(array('email','common_class'));
+        $this->load->library(array('email', 'pagination', 'common_class'));
+        $this->load->model('message_model');
     }
 
     /**
      * Index
      */
     public function index(){
-        $this->load->view('message_list');
+
+        $offset = 0; //偏移量
+
+        if ($this->input->get('per_page')) {
+            $offset = ((int)$this->input->get('per_page') - 1) * $this->per_page;//计算偏移量
+        }
+
+        $count = $this->message_model->get_list_total_num(); //总条数
+
+        //初始化分页数据
+        $config = $this->common_class->getPageConfigInfo('/message_list/?', $count, $this->per_page, $this->uri_segment);
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
+        $data['message_list'] = $this->message_model->get_list($offset, $this->per_page);
+        $this->load->view('message_list', $data);
     }
 
     public function send_mail(){
 
-//        if ((!$this->input->post('user_name')) && (!$this->input->post('content')) && (!$this->input->post('email')) && (!$this->input->post('add_time'))) {
-//
-//        } else {
-//            die('fail');
-//        }
+        if ((!$this->input->post('user_name')) || (!$this->input->post('content')) || (!$this->input->post('email')) || (!$this->input->post('add_time'))) {
+            die('fail');
+        }
 
         //获取EMIAL相关配置信息
         $data['email_config_info'] = $this->common_class->getUserConfInfo('email_config_info');
