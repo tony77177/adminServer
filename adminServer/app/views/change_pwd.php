@@ -75,7 +75,7 @@
                 $("#change_pwd").html('修改中...');
                 $("#change_pwd").attr('disabled',true);
                 $.ajax({
-                    url:"<?php echo site_url() ?>/index/change_pwd",
+                    url:"<?php echo site_url('index/change_pwd') ?>",
                     type:"POST",
                     data:{curr_pwd: curr_pwd, new_pwd: new_pwd},
                     success:function(msg){

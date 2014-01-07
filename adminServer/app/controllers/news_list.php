@@ -14,7 +14,6 @@ class News_list extends CI_Controller{
 
     function __construct(){
         parent::__construct();
-        $this->load->model('admin_model');
         $this->admin_model->auth_check();
         $this->load->library(array('common_class', 'pagination'));
         $this->load->model('news_model');
@@ -39,7 +38,7 @@ class News_list extends CI_Controller{
         $data['pagination'] = $this->pagination->create_links();
 
         $data['news_list'] = $this->news_model->get_list($offset, $this->per_page);
-        $this->load->view('news_list', $data);
+        $this->load->view('news_manage/news_list', $data);
     }
 
     /**
@@ -54,7 +53,7 @@ class News_list extends CI_Controller{
                 die('fail');
             }
         }
-        $this->load->view('news_add');
+        $this->load->view('news_manage/news_add');
     }
 
     /**
@@ -96,7 +95,7 @@ class News_list extends CI_Controller{
                 redirect('index');
             }
             $data['uuid'] = $_id;
-            $this->load->view('news_edit', $data);
+            $this->load->view('news_manage/news_edit', $data);
         }
     }
 }

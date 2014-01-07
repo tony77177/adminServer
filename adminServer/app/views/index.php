@@ -16,15 +16,15 @@
                         <tbody>
                             <tr>
                                 <th nowrap="nowrap">文章数</th>
-                                <td><a href="<?php echo site_url();?>/news_list/"><?php echo $news_num;?> 篇</a></td>
+                                <td><a href="<?php echo site_url('news_list');?>"><?php echo $news_num;?> 篇</a></td>
                             </tr>
                             <tr>
                                 <th nowrap="nowrap">留言数</th>
-                                <td><a href="<?php echo site_url();?>/message_list/"><?php echo $message_num;?> 条</a></td>
+                                <td><a href="<?php echo site_url('message_list');?>"><?php echo $message_num;?> 条</a></td>
                             </tr>
                             <tr>
                                 <th nowrap="nowrap">登录数</th>
-                                <td><a href="<?php echo site_url();?>/log_list/"><?php echo $login_num;?> 次</a></td>
+                                <td><a href="<?php echo site_url('log_list');?>"><?php echo $login_num;?> 次</a></td>
                             </tr>
                             <tr>
                                 <th nowrap="nowrap">上次登录时间</th>

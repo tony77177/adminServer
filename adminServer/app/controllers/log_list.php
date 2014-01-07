@@ -14,7 +14,6 @@ class Log_list extends CI_Controller{
 
     function __construct(){
         parent::__construct();
-        $this->load->model('admin_model');
         $this->admin_model->auth_check();
         $this->load->library(array('common_class', 'pagination'));
         $this->load->model('log_model');
@@ -38,7 +37,7 @@ class Log_list extends CI_Controller{
         $data['pagination'] = $this->pagination->create_links();
 
         $data['log_list'] = $this->log_model->get_list($offset, $this->per_page);
-        $this->load->view('log_list', $data);
+        $this->load->view('log_manage/log_list', $data);
     }
 
 }

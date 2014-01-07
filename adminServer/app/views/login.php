@@ -113,7 +113,7 @@
                 $("#login_btn").html("登录中...");
                 $("#login_btn").attr('disabled', true);
                 $.ajax({
-                    url: "<?php echo site_url() ?>/login/check_login",
+                    url: "<?php echo site_url('login/check_login') ?>",
                     type: "POST",
                     data: {user_name: user, pass_word: pwd},
                     success: function (msg) {

@@ -11,7 +11,6 @@ class Index extends CI_Controller{
 
     function __construct(){
         parent::__construct();
-        $this->load->model('admin_model');
         $this->admin_model->auth_check();
         $this->load->model('index_model');
     }

@@ -14,7 +14,6 @@ class Message_list extends CI_Controller{
 
     function __construct(){
         parent::__construct();
-        $this->load->model('admin_model');
         $this->admin_model->auth_check();
         $this->load->library(array('email', 'pagination', 'common_class'));
         $this->load->model('message_model');
@@ -39,7 +38,7 @@ class Message_list extends CI_Controller{
         $data['pagination'] = $this->pagination->create_links();
 
         $data['message_list'] = $this->message_model->get_list($offset, $this->per_page);
-        $this->load->view('message_list', $data);
+        $this->load->view('message_manage/message_list', $data);
     }
 
     public function send_mail(){
