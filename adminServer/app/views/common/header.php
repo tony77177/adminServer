@@ -20,7 +20,7 @@
     <script src="res/common/js/jquery-1.10.2.min.js"></script>
 
     <!-- artDialog -->
-    <script src="res/artDialog/artDialog.js?skin=default"></script>
+    <script src="res/artDialog/artDialog.js?skin=idialog"></script>
 
     <!-- Bootstrap JS -->
     <script src="res/bootstrap/js/bootstrap.min.js"></script>
@@ -54,9 +54,9 @@
                             class="glyphicon glyphicon-user"></span> <?php echo $this->session->userdata('admin_info'); ?> <b
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo site_url();?>/index/change_pwd"><span class="glyphicon glyphicon-cog"></span> 修改密码</a></li>
+                        <li><a href="<?php echo site_url('index/change_pwd');?>"><span class="glyphicon glyphicon-cog"></span> 修改密码</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo site_url();?>/login/login_out"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
+                        <li><a href="<?php echo site_url('login/login_out');?>"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
                     </ul>
                 </li>
             </ul>

@@ -19,7 +19,7 @@
     <script src="res/common/js/jquery-1.10.2.min.js"></script>
 
     <!-- artDialog -->
-    <script src="res/artDialog/artDialog.js?skin=default"></script>
+    <script src="res/artDialog/artDialog.js?skin=idialog"></script>
 
     <style>
         body {
@@ -110,7 +110,7 @@
                 });
                 return false;
             } else {
-                $("#login_btn").html("登录中...");
+                $("#login_btn").html("登录中，请稍后...");
                 $("#login_btn").attr('disabled', true);
                 $.ajax({
                     url: "<?php echo site_url('login/check_login') ?>",
