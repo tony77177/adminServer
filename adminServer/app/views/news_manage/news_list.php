@@ -28,7 +28,11 @@
                             for ($i = 0; $i < count($news_list); $i++) {
                                 ?>
                                 <tr id="news_list_<?=$news_list[$i]["id"];?>">
-                                    <td><a><?php echo $news_list[$i]["title"];?></a></td>
+                                    <td>
+                                        <a>
+                                            <?php echo $this->common_class->SubContents($news_list[$i]["title"],30);?>
+                                        </a>
+                                    </td>
                                     <td><?php echo $news_list[$i]["author"];?></td>
                                     <td><?php echo $news_list[$i]["create_dt"];?></td>
                                     <td id="news_list_operate_<?=$news_list[$i]["id"];?>">
