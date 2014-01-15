@@ -21,8 +21,8 @@ class News_model extends CI_Model{
      * @param $_author      作者
      * @return bool         TRUE OR FALSE
      */
-    function add_news($_title,$_content,$_author){
-        $insert_sql = "INSERT INTO t_news(id,title,content,author,create_dt) VALUES(UUID(),'".$_title."','".$_content."','".$_author."','".date('Y-m-d H:i:s')."')";
+    function add_news($_title,$_content,$_author,$_type){
+        $insert_sql = "INSERT INTO t_news(id,title,content,author,type,create_dt) VALUES(UUID(),'" . $_title . "','" . $_content . "','" . $_author . "','" . $_type . "','" . date('Y-m-d H:i:s') . "')";
         $result = $this->common_model->execQuery($insert_sql, 'default', TRUE);
         return $result;
     }
@@ -69,8 +69,8 @@ class News_model extends CI_Model{
      * 获取新闻数据总条数
      * @return int              条数
      */
-    function get_list_total_num(){
-        $sql = "SELECT COUNT(*) AS num FROM t_news";
+    function get_list_total_num($where = NULL){
+        $sql = "SELECT COUNT(*) AS num FROM t_news $where";
         $count = $this->common_model->getTotalNum($sql, 'default');
         return $count;
     }

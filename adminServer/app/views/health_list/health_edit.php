@@ -5,7 +5,7 @@
 
     <script>
         $(document).ready(function(){
-            $("#news_list").attr('class','active');
+            $("#health_list").attr('class','active');
 
             var editor;
             KindEditor.ready(function(K) {
@@ -51,7 +51,7 @@
                         resize: false
                     });
                     art.dialog.get('edit_news').title('修改中...').lock();
-                    $.post("<?php echo site_url() ?>/news_list/edit/"+uuid, {_title: title, _content: content}, function (msg) {
+                    $.post("<?php echo site_url() ?>/health_list/edit/"+uuid, {_title: title, _content: content}, function (msg) {
                         art.dialog.get('edit_news').close();
                         if (msg == 'ok') {
                             art.dialog({
@@ -64,7 +64,7 @@
                                 resize: false
                             });
                             $("#_edit").html('修改成功.');
-                            setTimeout("window.location.href='<?php echo site_url() ?>/news_list'",2000)
+                            setTimeout("window.location.href='<?php echo site_url() ?>/health_list'",2000)
                         } else {
                             art.dialog({
                                 id: 'warning',
@@ -91,7 +91,7 @@
             <div class="col-xs-10">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-plus-sign"></span>  修改文章</h3>
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-plus-sign"></span> 修改文章</h3>
                     </div>
                     <div class="panel-body">
 
@@ -112,7 +112,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="button" class="btn btn-primary" id="_edit">修改</button>&emsp;
-                                    <a href="<?php echo site_url('news_list'); ?>" class="btn btn-default" role="button">返回列表</a>
+                                    <a href="<?php echo site_url('health_list'); ?>" class="btn btn-default" role="button">返回列表</a>
                                     <input type="hidden" value="<?php echo $uuid;?>" id="uuid">
                                 </div>
                             </div>

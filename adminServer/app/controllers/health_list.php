@@ -1,13 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * 文章列表控制器
+ * 养生常识管理
  * Created by PhpStorm.
  * User: zhaoyu
- * Date: 13-12-31
- * Time: 下午3:05
+ * Date: 14-1-15
+ * Time: 下午4:35
  */
 
-class News_list extends CI_Controller{
+class Health_list extends CI_Controller{
 
     private $per_page = 5; //每页显示数据条数
     private $uri_segment = 2; //分页方法自动测定你 URI 的哪个部分包含页数
@@ -25,7 +25,7 @@ class News_list extends CI_Controller{
     public function index(){
 
         $offset = 0; //偏移量
-        $where = "WHERE type=0";
+        $where = "WHERE type=1";
 
         if ($this->input->get('per_page')) {
             $offset = ((int)$this->input->get('per_page') - 1) * $this->per_page; //计算偏移量
@@ -34,12 +34,12 @@ class News_list extends CI_Controller{
         $count = $this->news_model->get_list_total_num($where); //总条数
 
         //初始化分页数据
-        $config = $this->common_class->getPageConfigInfo('/news_list/?', $count, $this->per_page, $this->uri_segment);
+        $config = $this->common_class->getPageConfigInfo('/health_list/?', $count, $this->per_page, $this->uri_segment);
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
         $data['news_list'] = $this->news_model->get_list($offset, $this->per_page, $where);
-        $this->load->view('news_manage/news_list', $data);
+        $this->load->view('health_list/health_news', $data);
     }
 
     /**
@@ -47,14 +47,14 @@ class News_list extends CI_Controller{
      */
     public function add(){
         if ($this->input->post('_title') && $this->input->post('_content')) {
-            $result = $this->news_model->add_news($this->input->post('_title'), $this->input->post('_content'), $this->session->userdata('admin_info'), 0);
+            $result = $this->news_model->add_news($this->input->post('_title'), $this->input->post('_content'), $this->session->userdata('admin_info'), 1);
             if ($result) {
                 die('ok');
             } else {
                 die('fail');
             }
         }
-        $this->load->view('news_manage/news_add');
+        $this->load->view('health_list/health_add');
     }
 
     /**
@@ -96,10 +96,11 @@ class News_list extends CI_Controller{
                 redirect('index');
             }
             $data['uuid'] = $_id;
-            $this->load->view('news_manage/news_edit', $data);
+            $this->load->view('health_list/health_edit', $data);
         }
     }
+
 }
 
-/* End of file news_list.php */
-/* Location: ./app/controllers/news_list.php */
+/* End of file health_list.php */
+/* Location: ./app/controllers/health_list.php */
