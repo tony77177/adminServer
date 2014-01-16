@@ -37,7 +37,7 @@
                                     <td><?php echo $news_list[$i]["create_dt"];?></td>
                                     <td id="news_list_operate_<?=$news_list[$i]["id"];?>">
                                         <a href="<?php echo site_url('health_list/edit'); ?>/<?=$news_list[$i]["id"];?>"><span class="glyphicon glyphicon-edit"></span> 编辑</a> &emsp;
-                                        <a href="javascript:del('<?=$news_list[$i]["id"];?>');"><span class="glyphicon glyphicon-remove"></span> 删除</a>
+                                        <!--<a href="javascript:del('<?=$news_list[$i]["id"];?>');"><span class="glyphicon glyphicon-remove"></span> 删除</a>-->
                                     </td>
                                 </tr>
                             <?php
