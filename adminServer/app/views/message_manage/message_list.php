@@ -16,7 +16,7 @@
                         <tr>
                             <th>姓名</th>
                             <th>内容</th>
-                            <th>Email</th>
+                            <th>电话</th>
                             <th>时间</th>
                             <th>操作</th>
                         </tr>
@@ -32,7 +32,7 @@
                                             <?php echo $this->common_class->SubContents($message_list[$i]["content"]);?>
                                         </a>
                                     </td>
-                                    <td id="email_<?=$i;?>"><?php echo $message_list[$i]["email"];?></td>
+                                    <td id="phone_number_<?=$i;?>"><?php echo $message_list[$i]["phone_number"];?></td>
                                     <td id="add_time_<?=$i;?>"><?php echo $message_list[$i]["create_dt"];?></td>
                                     <td>
                                         <a href="javascript:send_email(<?=$i;?>);"><span class="glyphicon glyphicon-cloud-upload"></span> 发送到邮箱</a>
@@ -70,8 +70,8 @@
         var user_name = 'user_name_' + _id;
         var user_name = $("#" + user_name).text()
 
-        var email = 'email_' + _id;
-        var email = $("#" + email).text()
+        var phone_number = 'phone_number_' + _id;
+        var phone_number = $("#" + phone_number).text()
 
         var add_time = 'add_time_' + _id;
         var add_time = $("#" + add_time).text()
@@ -97,7 +97,7 @@
                 $.ajax({
                     url: "<?php echo site_url('message_list/send_mail') ?>",
                     type: "POST",
-                    data: {user_name: user_name, email: email, add_time: add_time, content: content},
+                    data: {user_name: user_name, phone_number: phone_number, add_time: add_time, content: content},
                     success: function (msg) {
                         art.dialog.get('send_mail').close();
                         if (msg == 'fail') {

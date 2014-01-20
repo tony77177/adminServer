@@ -43,7 +43,7 @@ class Message_list extends CI_Controller{
 
     public function send_mail(){
 
-        if ((!$this->input->post('user_name')) || (!$this->input->post('content')) || (!$this->input->post('email')) || (!$this->input->post('add_time'))) {
+        if ((!$this->input->post('user_name')) || (!$this->input->post('content')) || (!$this->input->post('phone_number')) || (!$this->input->post('add_time'))) {
             die('fail');
         }
 
@@ -72,7 +72,7 @@ class Message_list extends CI_Controller{
         $this->email->subject($email_title);
         $content = "<h3>姓名：" . $this->input->post('user_name') . "</h3>";
         $content .= "<h3>内容：" . $this->input->post('content') . "</h3>";
-        $content .= "<h3>邮箱：" . $this->input->post('email') . "</h3>";
+        $content .= "<h3>电话：" . $this->input->post('phone_number') . "</h3>";
         $content .= "<h3>时间：" . $this->input->post('add_time') . "</h3>";
         $content .= "邮件来自<a href=\"http://www.freedomdream.cn\" target=\"_blank\">畅想</a>";
         $this->email->message($content);
